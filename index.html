@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lily's Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .rounded-card { border-radius: 24px; }
+        html { scroll-behavior: smooth; }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-[#f8fafc] via-[#f1f5f9] to-[#e2e8f0] text-slate-700 font-sans min-h-screen">
+
+    <nav class="sticky top-0 z-50 backdrop-blur-md bg-white/70 border-b border-slate-200/50 p-4">
+        <div class="max-w-4xl mx-auto flex justify-between items-center">
+            <span class="font-extrabold text-2xl tracking-tight bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">Lily.</span>
+            <div class="space-x-6 text-sm font-medium">
+                <a href="#projects" class="text-slate-600 hover:text-indigo-600 transition">Technical Works</a>
+                <a href="#creative" class="text-slate-600 hover:text-indigo-600 transition">Creative Core</a>
+                <a href="#about" class="text-slate-600 hover:text-indigo-600 transition">About Me</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="py-24 px-6 text-center max-w-4xl mx-auto relative">
+        <div class="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top,rgba(99,102,241,0.08),transparent_50%)]"></div>
+        <h1 class="text-5xl md:text-6xl font-black text-slate-900 mb-6 tracking-tight">
+            Hi, I'm <span class="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 bg-clip-text text-transparent">Lily</span>! 👋
+        </h1>
+        <p class="text-xl text-slate-600 mb-10 max-w-2xl mx-auto leading-relaxed">
+            A Data Science student blending deep technical exploration with an expressive creative edge. I specialize in backend logic, data management frameworks, and finding human narratives within complex datasets.
+        </p>
+        <div class="flex justify-center gap-4">
+            <a href="mailto:arceljoybacuetes27@gmail.com" class="inline-block bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-10 py-4 rounded-full font-semibold hover:from-indigo-700 hover:to-purple-700 transition shadow-lg shadow-indigo-500/20 transform hover:-translate-y-0.5">
+                Say Hello
+            </a>
+            <a href="#projects" class="inline-block bg-white text-slate-700 border border-slate-200 px-10 py-4 rounded-full font-semibold hover:bg-slate-50 transition shadow-sm">
+                View Portfolio
+            </a>
+        </div>
+    </header>
+
+    <section id="projects" class="py-20 px-6 bg-white/60 backdrop-blur-sm border-t border-slate-200/40">
+        <div class="max-w-4xl mx-auto">
+            <div class="flex flex-col items-center md:items-start mb-12">
+                <h2 class="text-3xl font-extrabold text-slate-900 tracking-tight">Technical Repositories</h2>
+                <div class="h-1.5 w-20 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full mt-2"></div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="p-8 bg-white rounded-card border border-slate-100 shadow-sm hover:shadow-xl hover:border-indigo-100 transition-all duration-300 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-xs font-bold tracking-wider text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full uppercase">Backend Engineering</span>
+                            <span class="text-[10px] bg-slate-100 text-slate-500 px-2 py-1 rounded-md font-bold uppercase">Individual</span>
+                        </div>
+                        <h3 class="font-bold text-xl text-slate-800 mb-3">Fanbase API Development</h3>
+                        <p class="text-sm text-slate-600 leading-relaxed mb-4">
+                            Designed and engineered a dedicated system backend built to structure and track digital community interactions. Focused on developing clean endpoint management, reliable relational data components, and optimized queries.
+                        </p>
+                        <ul class="text-xs text-slate-500 list-disc list-inside space-y-1 mb-6">
+                            <li>Implemented schema declarations with SQLModel</li>
+                            <li>Configured structured environments for parameter routing</li>
+                            <li>Built out robust data manipulation utilities</li>
+                        </ul>
+                    </div>
+                    <div class="text-xs font-semibold text-slate-400">Python &bull; SQLModel &bull; REST API</div>
+                </div>
+
+                <div class="p-8 bg-white rounded-card border border-slate-100 shadow-sm hover:shadow-xl hover:border-indigo-100 transition-all duration-300 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-xs font-bold tracking-wider text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full uppercase">Data Pipelines</span>
+                            <span class="text-[10px] bg-slate-100 text-slate-500 px-2 py-1 rounded-md font-bold uppercase">Individual</span>
+                        </div>
+                        <h3 class="font-bold text-xl text-slate-800 mb-3">ETL Administrative Management</h3>
+                        <p class="text-sm text-slate-600 leading-relaxed mb-4">
+                            Constructed a system handling Extract, Transform, Load processes for administrative file systems. Designed the flow to intake complex data batches, cleanse raw attributes, and map them securely to static records.
+                        </p>
+                        <ul class="text-xs text-slate-500 list-disc list-inside space-y-1 mb-6">
+                            <li>Structured logical transformation parsing rules</li>
+                            <li>Optimized storage allocation pipelines for integrity</li>
+                            <li>Automated data loading safety checkpoints</li>
+                        </ul>
+                    </div>
+                    <div class="text-xs font-semibold text-slate-400">Data Engineering &bull; Pipeline Design</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="creative" class="py-20 px-6 bg-slate-50 border-b border-slate-200/40">
+        <div class="max-w-4xl mx-auto">
+            <div class="flex flex-col items-center md:items-start mb-12">
+                <h2 class="text-3xl font-extrabold text-slate-900 tracking-tight">Creative & Visual Portfolio</h2>
+                <div class="h-1.5 w-20 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full mt-2"></div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="p-8 bg-white rounded-card border border-slate-100 shadow-sm hover:shadow-xl hover:border-purple-100 transition-all duration-300">
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="text-xs font-bold tracking-wider text-purple-600 bg-purple-50 px-3 py-1 rounded-full uppercase">Visual Arts & Prose</span>
+                        <span class="text-[10px] bg-slate-100 text-slate-500 px-2 py-1 rounded-md font-bold uppercase">Creative Focus</span>
+                    </div>
+                    <h3 class="font-bold text-xl text-slate-800 mb-3">Aesthetic Storytelling</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed mb-4">
+                        A dedicated content project focused on capturing comforting, warm, and highly emotional aesthetic frames through photography. Each visual piece is paired with custom literary narrative text, exploring a complete artistic balance.
+                    </p>
+                    <div class="text-xs font-medium text-purple-600 bg-purple-50/50 p-3 rounded-xl border border-purple-100/50">
+                        ✨ Conceptual Focus: Mood tracking, high-quality lighting enhancements, and deep narrative consistency.
+                    </div>
+                </div>
+
+                <div class="p-8 bg-white rounded-card border border-slate-100 shadow-sm hover:shadow-xl hover:border-pink-100 transition-all duration-300">
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="text-xs font-bold tracking-wider text-pink-600 bg-pink-50 px-3 py-1 rounded-full uppercase">Cloud Architecture</span>
+                        <span class="text-[10px] bg-indigo-50 text-indigo-600 px-2 py-1 rounded-md font-bold uppercase">Assignment</span>
+                    </div>
+                    <h3 class="font-bold text-xl text-slate-800 mb-3">Static Cloud Interface</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed mb-4">
+                        The website you are currently browsing. Designed as an exercise to demonstrate proficiency in static hosting models, handling deployment structures, version mapping over GitHub, and Continuous Deployment via Render web instances.
+                    </p>
+                    <div class="text-xs font-medium text-pink-600 bg-pink-50/50 p-3 rounded-xl border border-pink-100/50">
+                        ☁️ Cloud Setup: Managed build roots, Git branch integration, and static routing networks.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 px-6 max-w-4xl mx-auto">
+        <div class="flex flex-col items-center mb-12">
+            <h2 class="text-2xl font-extrabold text-slate-900 tracking-tight">Technical Competencies</h2>
+            <div class="h-1 w-12 bg-indigo-500 rounded-full mt-2"></div>
+        </div>
+        
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+            <div class="p-4 bg-white/70 rounded-2xl border border-slate-200/50 shadow-sm">
+                <div class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Languages</div>
+                <div class="text-sm font-semibold text-slate-800">Python, SQL, HTML/CSS</div>
+            </div>
+            <div class="p-4 bg-white/70 rounded-2xl border border-slate-200/50 shadow-sm">
+                <div class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Data/Backend</div>
+                <div class="text-sm font-semibold text-slate-800">SQLModel, ETL Design</div>
+            </div>
+            <div class="p-4 bg-white/70 rounded-2xl border border-slate-200/50 shadow-sm">
+                <div class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Design Tools</div>
+                <div class="text-sm font-semibold text-slate-800">Figma, Canva Layouts</div>
+            </div>
+            <div class="p-4 bg-white/70 rounded-2xl border border-slate-200/50 shadow-sm">
+                <div class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">DevOps & Host</div>
+                <div class="text-sm font-semibold text-slate-800">GitHub, Render Cloud</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="pb-24 pt-4 px-6 max-w-4xl mx-auto">
+        <div class="bg-gradient-to-r from-indigo-900 via-purple-950 to-slate-950 p-10 md:p-12 rounded-card text-white shadow-xl relative overflow-hidden flex flex-col md:flex-row items-center gap-10">
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,rgba(236,72,153,0.15),transparent_60%)]"></div>
+            <div class="text-center md:text-left flex-1 relative z-10">
+                <h2 class="text-3xl font-extrabold mb-4 tracking-tight">Behind the Screen</h2>
+                <p class="text-indigo-200/90 leading-relaxed mb-4">
+                    Data science provides me the operational tools to map complex backend and tracking patterns cleanly, but my creative expressions give me the space to articulate them naturally. 
+                </p>
+                <p class="text-indigo-200/90 leading-relaxed">
+                    When I am away from databases and cloud management platforms, you can find me preserving warm, comforting visual atmospheres behind a camera lens, putting down structured narrative threads into creative stories, or exploring raw movement and rhythms through dance.
+                </p>
+            </div>
+            <div class="w-24 h-24 md:w-32 md:h-32 bg-white/10 border border-white/20 rounded-3xl flex flex-wrap items-center justify-center gap-2 p-4 text-3xl shrink-0 backdrop-blur-md shadow-2xl relative z-10 transform rotate-3 hover:rotate-0 transition duration-300">
+                📸 ✍️ 💃
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-12 text-center text-slate-400 border-t border-slate-200/30 text-xs tracking-wider">
+        <p>&copy; 2026 Lily | Cloud Computing Submission</p>
+    </footer>
+
+</body>
+</html>
