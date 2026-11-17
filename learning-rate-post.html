@@ -20,17 +20,18 @@
 <p>When I trained the same small network twice with different random seeds, the results were not identical. That made me wonder: how much of the difference between two training runs is just random noise, and is it large enough to hide the effect of changing the learning rate?</p>
 
 <h2>What is a learning rate?</h2>
-<p>A learning rate is a number that controls how big a step the optimizer takes each time it updates the weights. Each time the model updates a weight, it does: <code>new weight = old weight - learning rate x gradient</code>. If the learning rate is too small, training is very slow and the model barely improves within the 4 epochs I trained for. If it is too big, the updates overshoot the minimum, so the loss bounces around or blows up and the model may never learn.</p>
-<p>A seed is the starting number for the random number generator. Changing it changes the initial weights, the order of the training batches, and the train/validation shuffle, so every run follows a slightly different path.</p>
+<p>A learning rate is a number that controls how big a step the optimizer takes each time it updates the weights. Each time the model updates a weight, it does: <code>new weight = old weight - learning rate x gradient</code>. If the learning rate is too small, training is very slow and the model barely improves within the 4 epochs I trained for. If it is too big, the updates overshoot the minimum, so the loss bounces around and the model may never learn.</p>
+<p>A seed is the starting number for the random number generator. Changing it changes the initial weights, the order of the training batches, and the train/validation shuffle, so every run follows a slightly different path. Because one run can be lucky or unlucky, I ran each learning rate with three seeds (42, 43 and 44) instead of trusting a single result. If seeds made no difference, all three runs of a setting would give the same curve, and one run would be enough. In practice they differ a little, so I needed the mean and standard deviation to tell whether a gap between learning rates is bigger than that noise.</p>
 
 <h2>Experiment setup</h2>
-<p>I trained a small CNN on a 10,000-image subset of Fashion-MNIST, split 90% train and 10% validation. I used the Adam optimizer, batch size 64, and 4 epochs. I compared learning rates of 0.0001, 0.001 and 0.01, each with seeds 42, 43 and 44. Only the learning rate (and the seed) changed. I started from the class notebook, which already provided the seed setting, per-epoch logging and learning-curve plotting. I added a loop over learning rates and seeds, a mean/std summary table, and an error-bar plot.</p>
+<p>I trained a small CNN on a 10,000-image subset of Fashion-MNIST, split 90% train and 10% validation. I used a subset and only 4 epochs so that every run finished in a reasonable time. I used the Adam optimizer and batch size 64, and I kept these fixed in every run.</p>
+<p>I ran two experiments. First, I used the class notebook's sweep of five learning rates (1e-05, 0.0001, 0.001, 0.01 and 0.1) with one seed (42), which gives Figure 1. Then I repeated three of them (0.0001, 0.001 and 0.01) with seeds 42, 43 and 44, which gives Figure 2 and Table 1, so 9 runs in total. Only the learning rate (and the seed) changed. I started from the class notebook, which already had the seed setting, per-epoch metric logging and plotting functions. What I added was a loop over seeds, a mean and standard deviation summary table, and an error-bar plot.</p>
 <p>Code: <a href="https://github.com/Arcel27/Bacuetes_Portfolio/blob/main/Hyperparameters_(1).ipynb">notebook on GitHub</a>.</p>
 
 <h2>Results</h2>
 <figure>
   <img src="lr_curves.png" alt="Validation loss and accuracy per epoch for five learning rates">
-  <figcaption>Figure 1. Validation loss and accuracy per epoch for five learning rates. It shows that 1e-05 learned too slowly, with loss still high and accuracy still climbing at the last epoch; 0.001 reached the lowest loss and highest accuracy; and 0.1 stayed near 10% accuracy, which is chance for 10 classes, meaning it failed to learn.</figcaption>
+  <figcaption>Figure 1. Validation loss and accuracy per epoch for five learning rates (one seed, produced with the class notebook's plotting code). It shows that 1e-05 was too slow (77.5% and still improving at the end), 0.001 was best, and 0.1 stayed near 10%, which is chance for 10 classes. The 0.01 curve is worth noting: it did learn, but it improved quickly in the first epoch and then flattened, which suggests its steps were too large to settle into a better minimum.</figcaption>
 </figure>
 <figure>
   <img src="lr_seeds.png" alt="Validation accuracy versus learning rate, mean and std over 3 seeds">
@@ -42,23 +43,24 @@
   <tr><td>0.001</td><td>0.8767</td><td>0.0043</td></tr>
   <tr><td>0.01</td><td>0.8504</td><td>0.0050</td></tr>
 </table>
-<p>Table 1. Mean and standard deviation of best validation accuracy for each learning rate.</p>
+<p>Table 1. Mean and standard deviation of best validation accuracy for each learning rate over 3 seeds.</p>
 
 <h2>Discussion</h2>
-<p>The best learning rate was 0.001, with a mean validation accuracy of 87.67%. The gap from the others (about 1.3 points over 0.0001 and 2.6 points over 0.01) was bigger than the seed-to-seed spread (std about 0.004 to 0.005), so the difference is probably real and not just random variation.</p>
-<p>This matched what I expected from the theory. 0.0001 takes smaller steps and learns more slowly, so it ended lower after 4 epochs. 0.01 takes larger steps and also ended lower (about 85.0%). 0.001 sits in the middle, and it is also Adam's default.</p>
-<p>One limitation is that I only used 3 seeds, 4 epochs and a 10,000-image subset, so 0.0001 might catch up with more epochs, and the std estimate is rough.</p>
+<p>The best learning rate was 0.001 with 87.67% accuracy, and the gap from the others was bigger than the seed-to-seed spread (std about 0.004 to 0.005), so the difference is probably real and not just random variation. This matched what I expected from the theory. 0.0001 learned more slowly and ended lower after 4 epochs (86.4% on average). 0.01 took larger steps and also ended lower (about 85.0%). In the single-seed sweep, 0.1 was too large to learn at all, and 1e-05 was too small to get far in 4 epochs.</p>
+<p>One limitation is that I only used 3 seeds, 4 epochs and a 10,000-image subset, so a small learning rate like 1e-05 might catch up with more epochs, and the standard deviation estimate is rough. A second limitation is that I only varied the learning rate. I used Adam throughout and kept the batch size, the number of epochs and the network architecture fixed, so I cannot say whether the best learning rate would stay the same with a different optimizer such as SGD, or with other settings tuned alongside it. The "best" value I found is best only for this setup.</p>
 
 <h2>Takeaways and references</h2>
 <ol>
-  <li>Learning rate had a much bigger effect on accuracy than random seed did.</li>
-  <li>Too small is slow and too large can fail completely (stuck near 10%); 0.001 worked best here.</li>
-  <li>Run several seeds and report mean ± std before claiming one setting is better.</li>
+  <li>Learning rate had a bigger effect on accuracy than the seed did, because the gaps between rates were larger than the seed-to-seed spread of about 0.004 to 0.005.</li>
+  <li>Too small is slow, and too large either ends lower (0.01) or fails completely (0.1), because small steps barely move the weights in 4 epochs while large steps overshoot.</li>
+  <li>Run several seeds and report mean ± std before claiming one setting is better, because a single run could just be a lucky draw.</li>
 </ol>
 <ul>
-  <li><a href="https://github.com/Arcel27/Bacuetes_Portfolio/blob/main/Hyperparameters_(1).ipynb">My notebook</a></li>
+  <li><a href="https://github.com/Arcel27/Bacuetes_Portfolio/blob/main/Hyperparameters_(1).ipynb">My notebook</a> (adapted from the class notebook)</li>
   <li>Class notebook: hyperparameters_lightning.ipynb (instructor)</li>
   <li><a href="https://lightning.ai/docs/pytorch/stable/">PyTorch Lightning documentation</a></li>
+  <li>Kingma, D. and Ba, J. (2014). <a href="https://arxiv.org/abs/1412.6980">Adam: A Method for Stochastic Optimization</a></li>
+  <li>Xiao, H., Rasul, K. and Vollgraf, R. (2017). <a href="https://arxiv.org/abs/1708.07747">Fashion-MNIST: a Novel Image Dataset for Benchmarking Machine Learning Algorithms</a></li>
 </ul>
 
 <p><em>AI use: I used Claude to help debug code and to check grammar.</em></p>
