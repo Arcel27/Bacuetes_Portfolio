@@ -43,4 +43,32 @@
   <figcaption>Figure 3. Mean validation accuracy over 3 seeds, with error bars of one standard deviation. It shows that 0.001 performed best (0.8767), clearly above 0.0001 and 0.01, and the error bars are small compared with those gaps, so the ranking is not just seed luck.</figcaption>
 </figure>
 <table>
-  <tr><th>Learning rate</th><th>Mean val.
+  <tr><th>Learning rate</th><th>Mean val. accuracy</th><th>Std</th></tr>
+  <tr><td>0.0001</td><td>0.8636</td><td>0.0042</td></tr>
+  <tr><td>0.001</td><td>0.8767</td><td>0.0043</td></tr>
+  <tr><td>0.01</td><td>0.8504</td><td>0.0050</td></tr>
+</table>
+<p>Table 1. Mean and standard deviation of best validation accuracy for each learning rate over 3 seeds.</p>
+
+<h2>Discussion</h2>
+<p>The best learning rate was 0.001 with 87.67% accuracy, and the gap from the others was bigger than the seed-to-seed spread (std about 0.004 to 0.005), so the difference is probably real and not just random variation. This matched what I expected from the theory. 0.0001 learned more slowly and ended lower after 4 epochs (86.4% on average). 0.01 took larger steps and also ended lower (about 85.0%). In the single-seed sweep, 0.1 was too large to learn at all, and 1e-05 was too small to get far in 4 epochs.</p>
+<p>One limitation is that I only used 3 seeds, 4 epochs and a 10,000-image subset, so a small learning rate like 1e-05 might catch up with more epochs, and the standard deviation estimate is rough. A second limitation is that I only varied the learning rate. I used Adam throughout and kept the batch size, the number of epochs and the network architecture fixed, so I cannot say whether the best learning rate would stay the same with a different optimizer such as SGD, or with other settings tuned alongside it. The "best" value I found is best only for this setup.</p>
+
+<h2>Takeaways and references</h2>
+<ol>
+  <li>Learning rate had a bigger effect on accuracy than the seed did, because the gaps between rates were larger than the seed-to-seed spread of about 0.004 to 0.005.</li>
+  <li>Too small is slow, and too large either ends lower (0.01) or fails completely (0.1), because small steps barely move the weights in 4 epochs while large steps overshoot.</li>
+  <li>Run several seeds and report mean ± std before claiming one setting is better, because a single run could just be a lucky draw.</li>
+</ol>
+<ul>
+  <li><a href="https://github.com/Arcel27/Bacuetes_Portfolio/blob/main/Hyperparameters_(1).ipynb">My notebook</a> (adapted from the class notebook)</li>
+  <li>Class notebook: hyperparameters_lightning.ipynb (instructor)</li>
+  <li><a href="https://lightning.ai/docs/pytorch/stable/">PyTorch Lightning documentation</a></li>
+  <li>Kingma, D. and Ba, J. (2014). <a href="https://arxiv.org/abs/1412.6980">Adam: A Method for Stochastic Optimization</a></li>
+  <li>Xiao, H., Rasul, K. and Vollgraf, R. (2017). <a href="https://arxiv.org/abs/1708.07747">Fashion-MNIST: a Novel Image Dataset for Benchmarking Machine Learning Algorithms</a></li>
+</ul>
+
+<p><em>AI use: I used Claude to help plan the experiment, write and debug the seed-loop code, build the page layout, and check grammar and factual accuracy in my draft.</em></p>
+
+</body>
+</html>
